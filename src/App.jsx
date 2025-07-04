@@ -4,12 +4,12 @@ import './App.css'
 
 function App() {
 
-  const [dark, setDark] = useState('')
+  const [dark, setDark] = useState(false);
+  
   return (
     <>
       <div>
-
-        <div className="bg-amber-200 h-screen m-auto">
+        <div id={dark === true ? "dark" : " "} className="bg-amber-200 h-screen m-auto ">
           <div className="h-10"></div>
           <h1 className="text-4xl font-bold text-center flex justify-center mb-10 |PC SIZE| md:text-8xl md:font-semibold md:italic ">Today Weather</h1>
           <hr className='md:w-200 md:m-auto' />
@@ -37,11 +37,13 @@ function App() {
               </button>
             </div>
           </div>
-          <button onClick={()=>{setDark('night')}} id={dark === 'night' ?"dark":" "}
-            className='m-auto md:text-xl md:h-10 md:w-30 flex justify-center items-center rounded-md md active:outline-2 outline-red-600 cursor-pointer'>Dark Mode</button>
+          <button onClick={() => setDark((prev) => !prev)} id={dark === true ? "dark" : " "}
+            className='m-auto md:text-xl md:h-10 md:w-30 bg-amber-400 flex justify-center  items-center rounded-md md active:outline-2 outline-red-600 cursor-pointer'> {dark === true ? <p>Light</p>: <p>Night</p>}</button>
         </div>
       </div>
     </>
+
+
   )
 }
 
