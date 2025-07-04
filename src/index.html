@@ -13,26 +13,28 @@
     <title>Weather App</title>
     <link rel="icon" type="image/x-icon" href="../picture/weather icon.png" />
   </head>
-  <body class="bg-amber-300 h-200 m-auto">
+  <body class="bg-amber-200 h-150 m-auto">
     <div class="h-10"></div>
-    <h1 class="text-5xl font-bold text-black text-center flex justify-center mb-10">Today Weather</h1>
+    <h1 class="text-4xl font-bold text-black text-center flex justify-center mb-10 |PC SIZE| md:text-8xl md:font-semibold md:italic ">Today Weather</h1>
     <!-- Main  -->
     <div
-      class="container flex gap-50 justify-center h-80 border-2 border-red-700 items-center m-auto"
+      class=" flex  flex-col gap-10 text-center h-73 w-80 |PC SIZE| md:flex md:gap-15 md:items-center m-auto md:h-120 md:w-200 md:justify-center"
     >
-      <div class="right">
-        <p class="text-8xl">25°</p>
-        <p class="text-2xl">Chattogram</p>
-        <p class="text-1xl">12.45 am - Friday 04 July 2025</p>
+      <div class="right mt-2">
+        <p class="text-6xl |PC SIZE| md:text-[15rem] md:font-semibold">25°</p>
+        <p class="text-2xl |PC SIZE| md:text-5xl ">Chattogram</p>
+        <p class="text-1xl |PC SIZE| md:text-3xl md:mt-2">12.45 am - Friday 04 July 2025</p>
       </div>
-      <div class="left">
+      <!-- difference between -->
+      <div class="left |PC SIZE| md:flex md:gap-2 md:items-center md:justify-center">
         <input
-          class="p-2 block border-1 rounded-2xl w-100 max-md:w-50"
+          class="p-2 block m-auto border-1 rounded-2xl w-65 text-center |PC SIZE| md:h-10 md:m-auto md:w-100"
           type="text"
           placeholder="Search for a location"
         />
         <button
-          class="bg-[#dcdada] pl-1 mt-4 h-10 w-30 rounded-xl text-black font-bold items-center justify-center active:outline-2 hover:bg-[#ffffff]"
+          class="bg-[#dcdada] m-auto pl-1 mt-2 h-10 w-30 p-2 rounded-xl cursor-pointer text-black font-semibold items-center justify-center active:outline-2 hover:bg-[#ffffff] 
+          |PC SIZE|  md:h-10 md:m-auto "
         >
           Search
         </button>
