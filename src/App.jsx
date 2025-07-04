@@ -38,7 +38,7 @@ function App() {
             </div>
           </div>
           <button onClick={() => setDark((prev) => !prev)} id={dark === true ? "dark" : " "}
-            className='m-auto md:text-xl md:h-10 md:w-30 bg-amber-400 flex justify-center  items-center rounded-md md active:outline-2 outline-red-600 cursor-pointer'> {dark === true ? <p>Light</p>: <p>Night</p>}</button>
+            className='m-auto text-xl h-10 w-30 bg-amber-400 flex justify-center  items-center rounded-md md active:outline-2 outline-red-600 cursor-pointer'> {dark === true ? <p>Light</p>: <p>Night</p>}</button>
         </div>
       </div>
     </>
