@@ -1,12 +1,16 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 function App() {
   const [dark, setDark] = useState(false);
   const [wdata,Setwdata]=useState(false);
 
-  const search = async (location) => {
+ const search = async (location) => {
+    if (location == ""){
+      alert("Please Enter City Name");
+      return search;
+    }
     try {
       const WeatherApi = `http://api.weatherapi.com/v1/current.json?key=f71c3408c44a4cf8bbe101022250507&q=${location}&aqi=no`;
       const response = await fetch(WeatherApi);
@@ -21,10 +25,14 @@ function App() {
   }
 
   useEffect(() => {
-    search('Chittagong');
-  }, [])
+    search("Chittagong");
+  }, []);
+  const searchRef = useRef();
 
-  const Temparature = wdata && wdata.current ? wdata.current.temp_c:" ";
+  // const Temparature = wdata && wdata.current ? wdata.current.temp_c:" ";
+  const Temparature = wdata && wdata.current ? wdata.current.temp_c: " ";
+  const CurrentLocation = wdata && wdata.location ? wdata.location.name: " ";
+  const LastUpadted = wdata && wdata.current.condition ? wdata.current.condition.text: " ";
 
  
 
@@ -43,20 +51,21 @@ function App() {
           >
             <div className="right mt-2">
               <p className="text-6xl |PC SIZE| md:text-[10rem] md:font-semibold">{Temparature}°</p>
-              <p className="text-2xl |PC SIZE| md:text-3xl "></p>
-              <p className="text-1xl |PC SIZE| md:text-2xl md:mt-2"></p>
+              <p className="text-2xl |PC SIZE| md:text-3xl ">{CurrentLocation}</p>
+              <p className="text-1xl |PC SIZE| md:text-2xl md:mt-2">Last Updated: {LastUpadted}</p>
+              <p className="text-1xl |PC SIZE| md:text-xl md:mt-2">Condition: {LastUpadted}</p>
             </div>
             <div className="left |PC SIZE| md:flex md:flex-col md:gap-2">
 
               <input
-                // onChange={valueChange}
+                ref={searchRef}
                 // value={location}
                 className="p-2 block m-auto border-1  rounded-2xl w-65 text-center |PC SIZE| md:border-t-0 md:border-l-0 md:border-r-0 md:rounded-none md:outline-0 md:h-10 md:m-auto md:w-100 text-[#807C74]"
                 type="text"
                 placeholder="Search for a location"
               />
               <button
-                // onClick={()=>{setLocation(location)}}
+                onClick={()=>{search(searchRef.current.value)}}
                 className="bg-[#dcdada] m-auto pl-1 mt-2 h-10 w-30 p-2 rounded-xl cursor-pointer text-black font-semibold items-center justify-center active:outline-2 hover:bg-[#ffffff] 
                 |PC SIZE|  md:h-10 md:w-40 md:rounded-sm md:m-0 md:mt-3 "
               >
@@ -66,7 +75,7 @@ function App() {
           </div>
 
           <button onClick={() => setDark((prev) => !prev)} id={dark === true ? 'btndarkstyle' : ''}
-            className='m-auto text-xl h-10 w-30 bg-amber-400 flex justify-center  items-center rounded-md md active:outline-2 outline-red-600 cursor-pointer'> {dark === true ? <p>Light</p> : <p>Night</p>}</button>
+            className='m-auto text-xl h-10 w-30 bg-amber-400 flex justify-center  items-center rounded-md md active:outline-2 outline-red-600 cursor-pointer'> {dark === true ? <p>Light Mode</p> : <p>Night Mode</p>}</button>
         </div>
       </div>
     </>
