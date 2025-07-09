@@ -1,26 +1,34 @@
 
 import { useEffect, useState } from 'react'
 import './App.css'
+
 function App() {
   const [dark, setDark] = useState(false);
-  const [data, setData] = useState(null);
-  
+  const [wdata,Setwdata]=useState(false);
 
-const btnLocation = "Chittagong"
-  const apiUrl = `http://api.weatherapi.com/v1/current.json?key=f71c3408c44a4cf8bbe101022250507&q=${btnLocation}&aqi=no`
+  const search = async (location) => {
+    try {
+      const WeatherApi = `http://api.weatherapi.com/v1/current.json?key=f71c3408c44a4cf8bbe101022250507&q=${location}&aqi=no`;
+      const response = await fetch(WeatherApi);
+      const weatherdata = await response.json();
+      console.log(weatherdata)
+      Setwdata(weatherdata);
+    }
+    catch (error) {
+      console.log(error)
+    }
+
+  }
 
   useEffect(() => {
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => setData(data)).catch((error) => console.log(error))
+    search('Chittagong');
   }, [])
 
+  const Temparature = wdata && wdata.current ? wdata.current.temp_c:" ";
 
-  const temp = data && data.current ? data.current.temp_c : " ";
-  const seLocation = data && data.location ? data.location.name : " ";
-  const time = data && data.location ? data.location.localtime : " ";
+ 
 
-      
+
 
   return (
     <>
@@ -34,18 +42,21 @@ const btnLocation = "Chittagong"
             className=" flex  flex-col gap-10 text-center h-73 w-80 |PC SIZE| md:flex md:flex-row md:gap-50 md:items-center m-auto md:h-120 md:w-280 md:justify-center"
           >
             <div className="right mt-2">
-              <p className="text-6xl |PC SIZE| md:text-[10rem] md:font-semibold">{temp}°</p>
-              <p className="text-2xl |PC SIZE| md:text-3xl ">{seLocation}</p>
-              <p className="text-1xl |PC SIZE| md:text-2xl md:mt-2">{time}</p>
+              <p className="text-6xl |PC SIZE| md:text-[10rem] md:font-semibold">{Temparature}°</p>
+              <p className="text-2xl |PC SIZE| md:text-3xl "></p>
+              <p className="text-1xl |PC SIZE| md:text-2xl md:mt-2"></p>
             </div>
             <div className="left |PC SIZE| md:flex md:flex-col md:gap-2">
 
-              <input 
+              <input
+                // onChange={valueChange}
+                // value={location}
                 className="p-2 block m-auto border-1  rounded-2xl w-65 text-center |PC SIZE| md:border-t-0 md:border-l-0 md:border-r-0 md:rounded-none md:outline-0 md:h-10 md:m-auto md:w-100 text-[#807C74]"
                 type="text"
                 placeholder="Search for a location"
               />
-              <button 
+              <button
+                // onClick={()=>{setLocation(location)}}
                 className="bg-[#dcdada] m-auto pl-1 mt-2 h-10 w-30 p-2 rounded-xl cursor-pointer text-black font-semibold items-center justify-center active:outline-2 hover:bg-[#ffffff] 
                 |PC SIZE|  md:h-10 md:w-40 md:rounded-sm md:m-0 md:mt-3 "
               >
